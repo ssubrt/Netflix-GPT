@@ -6,102 +6,83 @@ import { useRef } from 'react';
 import { createUserWithEmailAndPassword} from "firebase/auth";
 import { auth } from '../utils/firebase';
 import {  signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 
 
 const Login = () => {
-  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
   const [errorMessage,setErrorMessage] = useState(null);
 
   const [isSignInForm,setIsSignInForm] = useState(true);
+  
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
-  const toggleSignInForm =()=>{
-    setIsSignInForm(!isSignInForm);
-  };
-
-  const handleButtonCLick = ()=>{
-    //Validate the form data
-   
-    const message = checkValidateData(email.current.value,password.current.value);
+  const handleButtonClick = () => {
+    const message = checkValidateData(email.current.value, password.current.value);
     setErrorMessage(message);
+    if (message) return;
 
-    if(message) return;
-      
-
-    //Sign Up Logic
     if (!isSignInForm) {
+      // Sign Up Logic
       createUserWithEmailAndPassword(
-        auth, 
+        auth,
         email.current.value,
-        password.current.value)
+        password.current.value
+      )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/12824231?v=4"
-          }).then(() => {
-            // Profile updated!
-            // ...
-            const {uid,email,displayName,photoURL} = auth.currentUser;
-        // ...
-        dispatch(
-          addUser({
-            uid:uid,email,
-            displayName: displayName, 
-            photoURL: photoURL
-          }));
-            navigate("/browse");
-          }).catch((error) => {
-            // An error occurred
-            // ...
-            setErrorMessage(error.message);
-          });
-          
-          console.log(user);
-       
-          // ...
+           
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" +  errorMessage);
-          // ..
+          setErrorMessage(errorCode + "-" + errorMessage);
         });
-    }
-    
-    else {
-      //Sign in Logic
+    } else {
+      // Sign In Logic
       signInWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    navigate("/browse");
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    setErrorMessage(errorCode + "-" +  errorMessage);
-  });
-
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
     }
+  };
 
-
-
-
-  }  
+  const toggleSignInForm = () => {
+    setIsSignInForm(!isSignInForm);
+  }; 
 
 
 
@@ -133,7 +114,7 @@ const Login = () => {
          <p className='text-red-500 font-bold text-lg py-2'>{errorMessage}</p>
 
         <button className='p-4 my-6 rounded-lg bg-red-700 w-full '
-         onClick={handleButtonCLick} >
+         onClick={handleButtonClick} >
         {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
         <p className='py-4 cursor-pointer' onClick={toggleSignInForm}>
