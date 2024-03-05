@@ -1,5 +1,5 @@
 import React from 'react'
-import { LOGO } from '../utils/constants';
+import { LOGO, USER_AVATAR } from '../utils/constants';
 import { auth } from '../utils/firebase';
 import {useNavigate} from "react-router-dom";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -58,9 +58,9 @@ const Header = () => {
        
       {user && (
       <div className="flex p-2"> 
-        <img src="https://avatars.githubusercontent.com/u/12824231?s=96&v=4"
+        <img  
          className="w-12 h-12 mr-2 rounded-sm "
-           alt="Try Again"/>
+         src={USER_AVATAR} alt="Try Again"/>
 
         <button className='bg-red-500 rounded-lg px-2 py-1  font-bold text-white'
         onClick={handleSignOut} 

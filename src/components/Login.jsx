@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import { createUserWithEmailAndPassword} from "firebase/auth";
 import { auth } from '../utils/firebase';
 import {  signInWithEmailAndPassword } from "firebase/auth";
-
+import { USER_AVATAR } from "../utils/constants"
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
@@ -39,10 +39,11 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
+            photoURL:USER_AVATAR,
            
           })
             .then(() => {
-              const { uid, email, displayName, photoURL } = auth.currentUser;
+              const {uid,email,displayName,photoURL} = auth.currentUser;
               dispatch(
                 addUser({
                   uid: uid,
@@ -86,7 +87,7 @@ const Login = () => {
 
 
 
-  return (
+  return ( 
     <div>
       <Header/> 
       <div className='absolute '>
