@@ -92,7 +92,7 @@ const Login = () => {
       <Header/> 
       <div className='absolute '>
       <img src={BG_URL} alt='Try Again'
-       className='h-screen w-screen' />
+       className="h-auto object-cover w-auto" />
       </div>
 
       <form onSubmit={(e) => e.preventDefault()}

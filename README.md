@@ -26,12 +26,14 @@
 - Custom hook for Now Playing Movies
 - Create MovieSlice
 - Update Store with movies Data
-- Planning For mainContainer and seconadary conatiner
+- Planning For mainContainer and seconadary container
 - Fetch Data for trailer Video
 - Update Store with trailer video data
 - Embedded the Yt trailer Video and make it autoplay and mute 
 - Tailwind CSS Classes for making main container
-
+- Build Secondary Component
+- Build Movie List
+- Build Movie Card
 
 
 
