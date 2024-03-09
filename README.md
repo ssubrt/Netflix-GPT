@@ -34,6 +34,12 @@
 - Build Secondary Component
 - Build Movie List
 - Build Movie Card
+- TMDB Image CDN URL
+- Made the Browse page Amazing with Tailwind CSS
+- usePopularmovie Custom hook
+- Gpt Search Page
+- Gpt Search Bar
+- (Bonus) Multi Language feature in our App
 
 
 

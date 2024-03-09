@@ -16,7 +16,7 @@ const GptSearch = () => {
     <div>
       <div className='absolute -z-10'>
   <img src={BG_URL} alt='Try Again'
-  className="h-auto object-cover w-auto"
+  className="h-screen object-cover w-screen"
    />
   </div>
 

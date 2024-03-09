@@ -1,7 +1,7 @@
 
 
 const  lang ={
-    on:{
+    en:{
         search:"Search",
         gptSearchPlaceholder:"What Would you like to watch today?"
     },
@@ -15,4 +15,4 @@ const  lang ={
     }
 }
 
-export default lang;
+export default lang; 
