@@ -31,4 +31,3 @@ export const BG_URL =
 ];
 
 
-export const OPENAI_KEY = "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";
